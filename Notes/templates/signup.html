@@ -1,0 +1,61 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+<div class="container mt-5">
+<div class="row">
+    <div class="col-sm-6">
+        <h2 class="text-center">EXISTING CUSTOMERS</h2>
+        <HR>
+        <p>After creating the account in this website,
+            u will be able to get access to the notes upload
+        and download process.</p>
+        <center><a href="{% url 'login' %}" class="btn btn-danger text-white mt-5">CREATE AN ACCOUNT</a></center>
+    </div>
+    <div class="col-sm-6">
+        <h2 class="text-center">REGISTRATION FORM</h2>
+        <HR>
+        <p>Don't have an account,please signup here...</p>
+        <form method="post">
+            {% csrf_token %}
+            <label>FirstName</label>
+                <input type="text" class = "form-control" placeholder="Enter FirstName" name="firstname">
+            <label>LastName</label>
+                <input type="text" class = "form-control" placeholder="Enter LastName" name="lastname">
+            <label>Contact</label>
+                <input type="text" class = "form-control" placeholder="Enter Contact Number" name="contact">
+            <label>Email ID</label>
+                <input type="email" class = "form-control" placeholder="Enter Your Email ID" name="emailid">
+            <label>Password</label>
+                <input type="password" class = "form-control" placeholder="Enter Password" name="password">
+            <label>Branch</label>
+                <select class="form-control" name="branch">
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Mathematical Modeling">Mathematical Modeling</option>
+                    <option value="Ethical Hacking">Ethical Hacking</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                </select>
+            <label>Are You?</label>
+            <select class="form-control" name="role">
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+            </select>
+                <input type="submit" class="btn btn-danger mt-2" value="REGISTER">
+        </form>
+    </div>
+</div>
+</div>
+{% if error == "no" %}
+<script>
+    alert('Signup Successfull');
+    window.location=('{% url 'login' %}');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong,Try Again');
+</script>
+
+{% endif %}
+{% endblock %}
